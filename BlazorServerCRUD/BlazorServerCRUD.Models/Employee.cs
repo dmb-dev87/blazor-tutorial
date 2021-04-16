@@ -1,3 +1,6 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace BlazorServerCRUD.Models
 {
     public class Employee
@@ -7,6 +10,6 @@ namespace BlazorServerCRUD.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth{get; set;}
         public Gender Gender{get; set;}
-        public Department Department{get; set;}
+        public int DepartmentID{get; set;}
     }
 }
