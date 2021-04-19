@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BlazorServerCRUD.Api.Models;
+using BlazorServerCRUD.Models;
 
 namespace BlazorServerCRUD.Api.Controllers
 {
@@ -20,33 +21,33 @@ namespace BlazorServerCRUD.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetEmployees()
+        public ActionResult GetEmployees()
         {
-            return Ok(await _employeeRepository.GetEmployees());
+            return Ok(_employeeRepository.GetEmployees());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetEmployee(int id)
+        public ActionResult GetEmployee(int id)
         {
-            return Ok(await _employeeRepository.GetEmployee(id));
+            return Ok(_employeeRepository.GetEmployee(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddEmployee(Employee employee)
+        public ActionResult AddEmployee(Employee employee)
         {
-            return Ok(await _employeeRepository.AddEmployee(employee));
+            return Ok(_employeeRepository.AddEmployee(employee));
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateEmployee(Employee employee)
+        public ActionResult UpdateEmployee(Employee employee)
         {
-            return Ok(await _employeeRepository.UpdateEmployee(employee));
+            return Ok(_employeeRepository.UpdateEmployee(employee));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteEmployee(int id)
+        public ActionResult DeleteEmployee(int id)
         {
-            return Ok(await _employeeRepository.DeleteEmployee(id));
+            return Ok(_employeeRepository.DeleteEmployee(id));
         }
     }
 }

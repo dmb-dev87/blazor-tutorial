@@ -16,7 +16,7 @@ namespace BlazorServerCRUD.Api.Models
 
         Employee UpdateEmployee(Employee employee);
 
-        void DeleteEmployee(int employeeId);
+        Employee DeleteEmployee(int employeeId);
     }
 
     public class EmployeeRepository : IEmployeeRepository
@@ -34,7 +34,7 @@ namespace BlazorServerCRUD.Api.Models
             return result.Entity;
         }
 
-        public void DeleteEmployee(int employeeId)
+        public Employee DeleteEmployee(int employeeId)
         {
             var result = _appDbContext.Employees.FirstOrDefault(e => e.EmployeeID == employeeId);
             if (result != null)
@@ -42,6 +42,8 @@ namespace BlazorServerCRUD.Api.Models
                 _appDbContext.Employees.Remove(result);
                 _appDbContext.SaveChanges();
             }
+
+            return result;
         }
 
         public Employee GetEmployee(int employeeId)
