@@ -1,5 +1,3 @@
-# blazor_tutorial
-
 # BlazorServerCRUD
 Blazor Server CRUD App in Visual Studio Code
 
