@@ -1,4 +1,12 @@
 ﻿@page "/fetchdata"
+
+@inherits FluxorComponent
+
+@using BlazorWithFluxor.Common
+@using BlazorWithFluxor.Features.Weather.Store
+
+@inject IDispatcher Dispatcher
+@inject IState<WeatherState> WeatherState
 @inject HttpClient Http
 
 <h1>Weather forecast</h1>
@@ -35,21 +43,21 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private WeatherForecast[] forecasts => WeatherState.Value.Forecasts;
+    private bool loading => WeatherState.Value.Loading;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        if (WeatherState.Value.Initialized == false)
+        {
+            LoadForecasts();
+            Dispatcher.Dispatch(new WeatherSetInitialzedAction());
+        }
+        base.OnInitialized();
     }
 
-    public class WeatherForecast
+    private void LoadForecasts()
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        Dispatcher.Dispatch(new WeatherLoadForecastsAction());
     }
 }
