@@ -29,10 +29,6 @@ namespace BlazorServerWithFluxor.Features.Weather.Store
         }
     }
 
-    
-
-    
-
     public static class WeatherReducers
     {
         [ReducerMethod]
